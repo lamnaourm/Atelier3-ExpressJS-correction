@@ -107,6 +107,11 @@ app.put('/livre', (req, res) => {
   res.sendStatus(202);
 })
 
+app.delete('/livre/:id', (req, res) => {
+  const id = req.params.id;
+  livres = livres.filter(item => item.id !== parseInt(id))
+  res.sendStatus(210);
+})
 
 app.listen(3000, (error) => {
   console.log("Serveur lance au port 3000");
