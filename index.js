@@ -1,7 +1,10 @@
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
+
 app.use(express.json());
+app.use(cors());
 
 var livres = [
   {
@@ -90,6 +93,20 @@ app.get('/livres/:id', (req, res) => {
         res.status(207).json(livre[0]);
 
 });
+
+app.post('/livre', (req, res) => {
+  const livre = req.body; 
+  livres.push(livre)
+  res.sendStatus(201);
+})
+
+
+app.put('/livre', (req, res) => {
+  const livre = req.body; 
+  livres = livres.map(item => item.id === livre.id ? livre: item);
+  res.sendStatus(202);
+})
+
 
 app.listen(3000, (error) => {
   console.log("Serveur lance au port 3000");
